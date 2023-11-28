@@ -2,7 +2,12 @@
 
 // Modules to control application life and create native browser window
 const { app, BrowserWindow,ipcMain,dialog,Menu,MessageChannelMain } = require('electron')
-const { ipcHandle } = require('./src/DarkMode/funtion')
+// const { ipcHandle } = require('./src/DarkMode/funtion')
+// const { ipcHandle } = require('./src/webBluetoothApi/function')
+// const { ipchandle } = require('./src/webHidApi/function')
+// const { ipcHandle } = require('./src/webSerialApi/function')
+// const { ipchandle } = require('./src/webUsbApi/function')
+const { handleMenu,handleGlobalShortcut } = require('./src/menuItem/function')
 const path = require('node:path')
 
 async function handleFileOpen () {
@@ -19,26 +24,31 @@ const createWindow = () => {
     height: 600,
     webPreferences: {
       // preload: path.join(__dirname, 'preload.js'), // 再渲染进程中运行 先于网页内容加载
-      preload: path.join(__dirname,'src/DarkMode/preload.js'),
+      // preload: path.join(__dirname,'src/DarkMode/preload.js'), // Dark mode
+      // preload: path.join(__dirname,'src/webBluetoothApi/preload.js'), // webBluetoothApi
       nodeIntegration: true,
       // contextIsolation: false
       sandbox: false
     }
   })
-  // 
-  mainWindow.loadFile('src/DarkMode/index.html')
+
+  // ipcHandle(mainWindow)
+  // ipchandle(mainWindow)
+  mainWindow.loadFile('src/menuItem/index.html')
 
   // 打开开发工具
   mainWindow.webContents.openDevTools()
 }
 
-ipcHandle()
+// ipcHandle()
+
+handleMenu()
 
 // 这段程序将会在 Electron 结束初始化
 // 和创建浏览器窗口的时候调用
 // 部分 API 在 ready 事件触发后才能使用。
 app.whenReady().then(() => {
-
+  handleGlobalShortcut()
   createWindow()
   app.on('activate', () => {
     // 在 macOS 系统内, 如果没有已开启的应用窗口
