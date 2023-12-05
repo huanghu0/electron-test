@@ -1,8 +1,8 @@
 // main.js
 
 // Modules to control application life and create native browser window
-const { app, BrowserWindow,ipcMain,dialog,Menu,MessageChannelMain } = require('electron')
-const path = require('node:path')
+// const { app, BrowserWindow,ipcMain,dialog,Menu,MessageChannelMain } = require('electron')
+// const path = require('node:path')
 // const { ipcHandle } = require('./src/DarkMode/funtion')
 // const { ipcHandle } = require('./src/webBluetoothApi/function')
 // const { ipchandle } = require('./src/webHidApi/function')
@@ -11,12 +11,12 @@ const path = require('node:path')
 // const { handleMenu,handleGlobalShortcut } = require('./src/menuItem/function')
 
 
-async function handleFileOpen () {
-  const { canceled, filePaths } = await dialog.showOpenDialog()
-  if (!canceled) {
-    return filePaths[0]
-  }
-}
+// async function handleFileOpen () {
+//   const { canceled, filePaths } = await dialog.showOpenDialog()
+//   if (!canceled) {
+//     return filePaths[0]
+//   }
+// }
 
 // let mainWindow
 
@@ -53,29 +53,29 @@ async function handleFileOpen () {
 //   })
 // }
 
-const createWindow = () => {
-  // Create the browser window.
-  mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600,
-    webPreferences: {
-      // preload: path.join(__dirname, 'preload.js'), // 再渲染进程中运行 先于网页内容加载
-      // preload: path.join(__dirname,'src/DarkMode/preload.js'), // Dark mode
-      // preload: path.join(__dirname,'src/webBluetoothApi/preload.js'), // webBluetoothApi
-      // preload: path.join(__dirname,'src/DeepLinks/preload.js'), // Deep Links
-      nodeIntegration: true, 
-      // contextIsolation: false
-      sandbox: false
-    }
-  })
+// const createWindow = () => {
+//   // Create the browser window.
+//   mainWindow = new BrowserWindow({
+//     width: 800,
+//     height: 600,
+//     webPreferences: {
+//       // preload: path.join(__dirname, 'preload.js'), // 再渲染进程中运行 先于网页内容加载
+//       // preload: path.join(__dirname,'src/DarkMode/preload.js'), // Dark mode
+//       // preload: path.join(__dirname,'src/webBluetoothApi/preload.js'), // webBluetoothApi
+//       // preload: path.join(__dirname,'src/DeepLinks/preload.js'), // Deep Links
+//       nodeIntegration: true, 
+//       // contextIsolation: false
+//       sandbox: false
+//     }
+//   })
 
-  // ipcHandle(mainWindow)
-  // ipchandle(mainWindow)
-  mainWindow.loadFile('src/Dock/index.html')
+//   // ipcHandle(mainWindow)
+//   // ipchandle(mainWindow)
+//   mainWindow.loadFile('src/Dock/index.html')
 
-  // 打开开发工具
-  mainWindow.webContents.openDevTools()
-}
+//   // 打开开发工具
+//   mainWindow.webContents.openDevTools()
+// }
 
 // ipcHandle()
 
@@ -112,34 +112,35 @@ const createWindow = () => {
 // })
 
 
-const dockMenu = Menu.buildFromTemplate([
-  {
-    label: 'New Window',
-    click () { console.log('New Window') }
-  }, {
-    label: 'New Window with Settings',
-    submenu: [
-      { label: 'Basic' },
-      { label: 'Pro' }
-    ]
-  },
-  { label: 'New Command...' }
-])
+// const dockMenu = Menu.buildFromTemplate([
+//   {
+//     label: 'New Window',
+//     click () { console.log('New Window') }
+//   }, {
+//     label: 'New Window with Settings',
+//     submenu: [
+//       { label: 'Basic' },
+//       { label: 'Pro' }
+//     ]
+//   },
+//   { label: 'New Command...' }
+// ])
 
-app.whenReady().then(() => {
-  if (process.platform === 'darwin') {
-    app.dock.setMenu(dockMenu)
-  }
-}).then(createWindow)
+// app.whenReady().then(() => {
+//   if (process.platform === 'darwin') {
+//     app.dock.setMenu(dockMenu)
+//   }
+// }).then(createWindow)
 
-app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin') {
-    app.quit()
-  }
-})
+// app.on('window-all-closed', () => {
+//   if (process.platform !== 'darwin') {
+//     app.quit()
+//   }
+// })
 
-app.on('activate', () => {
-  if (BrowserWindow.getAllWindows().length === 0) {
-    createWindow()
-  }
-})
+// app.on('activate', () => {
+//   if (BrowserWindow.getAllWindows().length === 0) {
+//     createWindow()
+//   }
+// })
+
