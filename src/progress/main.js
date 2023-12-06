@@ -1,11 +1,13 @@
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow,autoUpdater } = require('electron')
+const path = require('path')
 
 let progressInterval
 
 function createWindow () {
   const win = new BrowserWindow({
     width: 800,
-    height: 600
+    height: 600,
+    icon: './src/assets/img/react.png'
   })
 
   win.loadFile('index.html')
